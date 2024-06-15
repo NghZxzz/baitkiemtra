@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+  <h1>Edit Nhân viên</h1>
+  <form th:action="@{/nhanvien/edit}" th:object="${nhanvien}" method="post">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="Ma_NV">Mã Nhân Viên:</label>
+      <input class="form-control" type="text" th:field="*{Ma_NV}" id="Ma_NV">
+      <span class="text-danger" th:if="${#fields.hasErrors('Ma_NV')}" th:errors="*{Ma_NV}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="Ten_NV">Tên Nhân Viên:</label>
+      <input class="form-control" type="text" th:field="*{Ten_NV}" id="Ten_NV">
+      <span class="text-danger" th:if="${#fields.hasErrors('Ten_NV')}" th:errors="*{Ten_NV}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="Phai">Giới Tính:</label>
+      <input class="form-control" type="text" th:field="*{Phai}" id="Phai"> </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="Noi_Sinh">Nơi Sinh:</label>
+      <input class="form-control" type="text" th:field="*{Noi_Sinh}" id="Noi_Sinh">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="phongban">Phòng Ban:</label>
+      <select class="form-control" id="phongban" th:field="*{PhongBan.Ma_Phong}">
+        <option value="">Chọn phòng ban --</option>
+        <option th:each="phongban : ${phongbans}" th:value="${phongban.Ma_Phong}" th:text="${phongban.Ten_Phong}"></option>
+      </select>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="Luong">Luong:</label>
+      <input class="form-control" type="text" th:field="*{Luong}" id="Luong">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+  <br>
+  <a th:href="@{/nhanviens}">Back to List</a>
+</div>
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
